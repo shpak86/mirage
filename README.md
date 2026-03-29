@@ -33,7 +33,7 @@ Mirage lets you send HTTP(S) requests that look like real browser traffic, by im
 Assuming you have Go installed (1.21+):
 
 ```bash
-git clone https://github.com/yourname/mirage.git
+git clone https://github.com/shpak86/mirage
 cd mirage
 
 go build -o mirage .

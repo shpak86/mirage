@@ -1,7 +1,7 @@
 package main
 
 import (
-	"mirage/internal/cmd"
+	"github.com/shpak86/mirage/internal/cmd"
 )
 
 func main() {

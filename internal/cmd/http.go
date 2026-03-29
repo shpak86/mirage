@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"mirage/internal/client"
 	"os"
 	"strings"
 
+	"github.com/shpak86/mirage/internal/client"
 	"github.com/spf13/cobra"
 )
 

@@ -32,16 +32,19 @@ Mirage lets you send HTTP(S) requests that look like real browser traffic, by im
 
 Assuming you have Go installed (1.21+):
 
+You can build mirage using folowing commands:
+
 ```bash
 git clone https://github.com/shpak86/mirage
 cd mirage
-
 go build -o mirage .
-# or
-go install ./...
 ```
 
-This builds the `mirage` binary using the `cmd` package (`Execute()` from `root.go`).
+To install mirage use go install:
+
+```bash
+go install github.com/shpak86/mirage/cmd/mirage
+```
 
 ---
 

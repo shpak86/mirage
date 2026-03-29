@@ -1,4 +1,4 @@
-module mirage
+module github.com/shpak86/mirage
 
 go 1.26.1
 

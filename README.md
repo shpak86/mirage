@@ -62,7 +62,7 @@ mirage http URL [flags]
 
 - `-f, --fp string`  
   Fingerprint profile in format `PLATFORM-OS`.  
-  Platforms: `chrome`, `firefox`.  
+  Platforms: `chrome`, `chrome58`, `chrome62`, `chrome70`, `chrome72`, `chrome83`, `chrome87`, `chrome96`, `chrome100`, `chrome102`, `chrome106`, `chrome120`, `chrome120`, `chrome145`, `firefox`, `firefox55`, `firefox56`, `firefox63`, `firefox65`, `firefox99`, `firefox102`, `firefox105`, `firefox120`, `firefox148`.
   OS: `linux`, `windows`, `mac`, `android`, `macos`.  
   Controls both HTTP headers (UA, client hints) and low-level TLS/JA\* fingerprint parameters used for browser impersonation.  
   Default: `chrome-android`.

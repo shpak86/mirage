@@ -27,12 +27,12 @@ func newHttpCommand() *cobra.Command {
 		Long:  "Do a single HTTP(s) request",
 		Short: "Do a single HTTP(s) request",
 		Example: `mirage http https://example.com --method get --fp firefox-linux --header "X-Custom-Header:value1" --header "X-Custom-Header:value2" --cookie "session=313373"
-cat payload | mirage http https://example.com --method POST --fp chrome-windows --format json`,
+cat payload | mirage http https://example.com --body --method POST --fp chrome99-windows --format json`,
 		Args: cobra.ExactArgs(1),
 		RunE: executeHttp,
 	}
 
-	httpCmd.PersistentFlags().StringP("fp", "f", "chrome-android", "fingerprint profile in format PLATFORM-OS. Platforms: chrome, firefox. OS: linux, windows, mac, android, macos. Controls both HTTP headers (UA, client hints) and low-level TLS/JA* fingerprint parameters used for browser impersonation.")
+	httpCmd.PersistentFlags().StringP("fp", "f", "chrome-android", "fingerprint profile in format PLATFORM-OS. Platforms: chrome, chrome58, chrome62, chrome70, chrome72, chrome83, chrome87, chrome96, chrome100, chrome102, chrome106, chrome120, chrome120, chrome145, firefox, firefox55, firefox56, firefox63, firefox65, firefox99, firefox102, firefox105, firefox120, firefox148. OS: linux, windows, mac, android, macos. Controls both HTTP headers (UA, client hints) and low-level TLS/JA* fingerprint parameters used for browser impersonation.")
 	httpCmd.PersistentFlags().StringP("method", "m", "GET", "HTTP method")
 	httpCmd.PersistentFlags().StringSliceP("header", "H", []string{}, "set header in format KEY:VALUE")
 	httpCmd.PersistentFlags().StringSliceP("cookie", "C", []string{}, "set cookie")

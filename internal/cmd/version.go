@@ -13,7 +13,7 @@ func newVersionCommand() *cobra.Command {
 		Short: "Print the version number of mirage",
 		Long:  "Print the version number of mirage",
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Fprintln(os.Stdout, "mirage v0.1.1")
+			fmt.Fprintln(os.Stdout, "mirage v0.1.2")
 		},
 	}
 }

@@ -60,9 +60,72 @@ func (h *HttpClient) Do(request Request) (response *Response, err error) {
 	case "chrome":
 		imporsonate.Chrome()
 		builder.JA().Chrome()
+	case "chrome58":
+		imporsonate.Chrome()
+		builder.JA().Chrome58()
+	case "chrome62":
+		imporsonate.Chrome()
+		builder.JA().Chrome62()
+	case "chrome70":
+		imporsonate.Chrome()
+		builder.JA().Chrome70()
+	case "chrome72":
+		imporsonate.Chrome()
+		builder.JA().Chrome72()
+	case "chrome83":
+		imporsonate.Chrome()
+		builder.JA().Chrome83()
+	case "chrome87":
+		imporsonate.Chrome()
+		builder.JA().Chrome87()
+	case "chrome96":
+		imporsonate.Chrome()
+		builder.JA().Chrome96()
+	case "chrome100":
+		imporsonate.Chrome()
+		builder.JA().Chrome100()
+	case "chrome102":
+		imporsonate.Chrome()
+		builder.JA().Chrome102()
+	case "chrome106":
+		imporsonate.Chrome()
+		builder.JA().Chrome106()
+	case "chrome120":
+		imporsonate.Chrome()
+		builder.JA().Chrome120()
+	case "chrome145":
+		imporsonate.Chrome()
+		builder.JA().Chrome145()
 	case "firefox":
 		imporsonate.Firefox()
 		builder.JA().Firefox()
+	case "firefox55":
+		imporsonate.Firefox()
+		builder.JA().Firefox55()
+	case "firefox56":
+		imporsonate.Firefox()
+		builder.JA().Firefox56()
+	case "firefox63":
+		imporsonate.Firefox()
+		builder.JA().Firefox63()
+	case "firefox65":
+		imporsonate.Firefox()
+		builder.JA().Firefox65()
+	case "firefox99":
+		imporsonate.Firefox()
+		builder.JA().Firefox99()
+	case "firefox102":
+		imporsonate.Firefox()
+		builder.JA().Firefox102()
+	case "firefox105":
+		imporsonate.Firefox()
+		builder.JA().Firefox105()
+	case "firefox120":
+		imporsonate.Firefox()
+		builder.JA().Firefox120()
+	case "firefox148":
+		imporsonate.Firefox()
+		builder.JA().Firefox148()
 	default:
 		return nil, fmt.Errorf("unknown browser %s", browser)
 	}

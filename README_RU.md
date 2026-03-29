@@ -62,7 +62,7 @@ mirage http URL [флаги]
 
 - `-f, --fp string`  
   Профиль фингерпринта в формате `PLATFORM-OS`.  
-  Платформы: `chrome`, `firefox`.  
+  Платформы: `chrome`, `chrome58`, `chrome62`, `chrome70`, `chrome72`, `chrome83`, `chrome87`, `chrome96`, `chrome100`, `chrome102`, `chrome106`, `chrome120`, `chrome120`, `chrome145`, `firefox`, `firefox55`, `firefox56`, `firefox63`, `firefox65`, `firefox99`, `firefox102`, `firefox105`, `firefox120`, `firefox148`.
   ОС: `linux`, `windows`, `mac`, `android`, `macos`.  
   Управляет и HTTP‑заголовками (UA, client hints), и низкоуровневыми TLS/JA\* параметрами, используемыми для имперсонации браузера.  
   По умолчанию: `chrome-android`.

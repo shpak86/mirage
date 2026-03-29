@@ -46,6 +46,8 @@ go build -o mirage .
 go install github.com/shpak86/mirage/cmd/mirage
 ```
 
+Вы можете насти бинарные сборки под вашу платформу на странице [релизов](https://github.com/shpak86/mirage/releases).
+
 ---
 
 ## Использование

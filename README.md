@@ -46,6 +46,8 @@ To install mirage use go install:
 go install github.com/shpak86/mirage/cmd/mirage
 ```
 
+Precompiled binaries for different platforms ad OSes are available [here](https://github.com/shpak86/mirage/releases).
+
 ---
 
 ## Usage

@@ -11,10 +11,21 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const (
+	reset  = "\033[0m"
+	bold   = "\033[1m"
+	red    = "\033[31m"
+	green  = "\033[32m"
+	yellow = "\033[33m"
+	blue   = "\033[34m"
+	cyan   = "\033[36m"
+)
+
 func newHttpCommand() *cobra.Command {
 	var httpCmd = cobra.Command{
-		Use:  "http",
-		Long: "Do a single HTTP(s) request",
+		Use:   "http",
+		Long:  "Do a single HTTP(s) request",
+		Short: "Do a single HTTP(s) request",
 		Example: `mirage http https://example.com --method get --fp firefox-linux --header "X-Custom-Header:value1" --header "X-Custom-Header:value2" --cookie "session=313373"
 cat payload | mirage http https://example.com --method POST --fp chrome-windows --format json`,
 		Args: cobra.ExactArgs(1),
@@ -125,42 +136,49 @@ func executeHttp(cmd *cobra.Command, args []string) error {
 func printHttpResponsePlain(resp *client.Response, includeRequest, includeStatus, includeHeaders, includeBody bool) error {
 	if includeRequest {
 		req := resp.RawRequest
-		fmt.Fprintln(os.Stdout, "=== Request ===")
-		fmt.Fprintf(os.Stdout, "%s %s\n", req.Method, req.URL)
+		fmt.Fprintln(os.Stdout, bold+"=== Request ==="+reset)
+		fmt.Fprintf(os.Stdout, "%s%s%s%s %s\n", bold, green, req.Method, reset, req.URL.String())
 
 		if len(req.Header) > 0 {
-			fmt.Fprintln(os.Stdout, "\nHeaders:")
+			fmt.Fprintln(os.Stdout, "\n"+cyan+"Headers:"+reset)
 			for k, vals := range req.Header {
 				for _, v := range vals {
-					fmt.Fprintf(os.Stdout, "%s: %s\n", k, v)
+					fmt.Fprintf(os.Stdout, "%s%s%s:%s %s\n", bold, blue, k, reset, v)
 				}
 			}
 		}
 
 		if req.Body != nil {
-			if body, err := io.ReadAll(req.Body); err == nil {
-				fmt.Fprintln(os.Stdout, "\nBody:")
+			if body, err := io.ReadAll(req.Body); err == nil && len(body) > 0 {
+				fmt.Fprintln(os.Stdout, "\n"+cyan+"Body:"+reset)
 				fmt.Fprintln(os.Stdout, string(body))
 			}
 		}
 	}
 
-	fmt.Fprintln(os.Stdout, "\n=== Response ===")
+	fmt.Fprintln(os.Stdout, "\n"+bold+"=== Response ==="+reset)
 	if includeStatus {
-		fmt.Fprintf(os.Stdout, "HTTP/%d.%d %d %s\n", resp.RawResponse.ProtoMajor, resp.RawResponse.ProtoMinor, resp.RawResponse.StatusCode, resp.RawResponse.Status)
+		statusColor := green
+		if resp.RawResponse.StatusCode >= 400 {
+			statusColor = red
+		}
+		fmt.Fprintf(os.Stdout, "%sHTTP/%d.%d %d %s%s\n", statusColor, resp.RawResponse.ProtoMajor,
+			resp.RawResponse.ProtoMinor, resp.RawResponse.StatusCode, resp.RawResponse.Status, reset)
 	}
 
 	if includeHeaders {
+		fmt.Fprintln(os.Stdout, "")
+		fmt.Fprintln(os.Stdout, cyan+"Headers:"+reset)
 		for k, vals := range resp.RawResponse.Header {
 			for _, v := range vals {
-				fmt.Fprintf(os.Stdout, "%s: %s\n", k, v)
+				fmt.Fprintf(os.Stdout, "%s%s%s:%s %s\n", bold, blue, k, reset, v)
 			}
 		}
-		fmt.Fprintln(os.Stdout)
 	}
 
 	if includeBody {
-		if body, err := io.ReadAll(resp.RawResponse.Body); err == nil {
+		if body, err := io.ReadAll(resp.RawResponse.Body); err == nil && len(body) > 0 {
+			fmt.Fprintln(os.Stdout, "\n"+cyan+"Body:"+reset)
 			fmt.Fprintln(os.Stdout, string(body))
 		}
 	}
@@ -187,7 +205,6 @@ func printHttpResponseJson(resp *client.Response, includeRequest, includeStatus,
 		if req.Body != nil {
 			if body, err := io.ReadAll(req.Body); err == nil {
 				requestOutput["body"] = string(body)
-				// req.Body = io.NopCloser(bytes.NewBuffer(body)) // Restore body
 			}
 		}
 		responseOutput["request"] = requestOutput

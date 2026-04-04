@@ -93,6 +93,11 @@ mirage http URL [flags]
   - `json` – structured JSON.
   Default: `plain`.
 
+- `--proxy string`  
+  HTTP proxy URL (e.g. `socks5://127.0.0.1:8080`).
+  If set, all requests will be routed through the specified proxy.
+  Default: no proxy.
+
 ---
 
 ## Examples

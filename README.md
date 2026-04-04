@@ -98,6 +98,11 @@ mirage http URL [flags]
   If set, all requests will be routed through the specified proxy.
   Default: no proxy.
 
+- `--version string`  
+  HTTP protocol version (`1.1`, `2`, `3`).
+  If not specified, the version is determined automatically based on the fingerprint and server capabilities.
+  Default: auto.
+
 ---
 
 ## Examples

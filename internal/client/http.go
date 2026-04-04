@@ -138,7 +138,7 @@ func (h *HttpClient) Do(request Request) (response *Response, err error) {
 	}
 
 	switch request.HttpVersion {
-	case "1":
+	case "1.1":
 		builder.ForceHTTP1()
 	case "2":
 		builder.ForceHTTP2()

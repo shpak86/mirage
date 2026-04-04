@@ -40,6 +40,7 @@ cat payload | mirage http https://example.com --body --method POST --fp chrome99
 	httpCmd.PersistentFlags().BoolP("body", "b", false, "read request body from stdio")
 	httpCmd.PersistentFlags().StringP("format", "F", "plain", `format output: plain, json`)
 	httpCmd.PersistentFlags().StringP("proxy", "p", "", "proxy address. example: socks5://proxy.example.com:8080")
+	httpCmd.PersistentFlags().StringP("version", "v", "", "HTTP protocol version 1, 2  or 3.")
 
 	return &httpCmd
 }
@@ -99,6 +100,12 @@ func executeHttp(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	version, err := cmd.Flags().GetString("version")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "error: %s\n", err.Error())
+		return err
+	}
+
 	httpClient := client.NewHttpClient(proxy)
 	request := client.Request{
 		Method:      methodFlag,
@@ -107,6 +114,7 @@ func executeHttp(cmd *cobra.Command, args []string) error {
 		Headers:     headers,
 		Cookies:     cookies,
 		Body:        body,
+		HttpVersion: version,
 	}
 	response, err := httpClient.Do(request)
 	if err != nil {

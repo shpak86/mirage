@@ -17,6 +17,7 @@ type Request struct {
 	Headers     map[string][]string
 	Cookies     []string
 	Body        []byte
+	HttpVersion string
 }
 
 type Response struct {
@@ -134,6 +135,19 @@ func (h *HttpClient) Do(request Request) (response *Response, err error) {
 		builder.JA().Firefox148()
 	default:
 		return nil, fmt.Errorf("unknown browser %s", browser)
+	}
+
+	switch request.HttpVersion {
+	case "1":
+		builder.ForceHTTP1()
+	case "2":
+		builder.ForceHTTP2()
+	case "3":
+		builder.ForceHTTP3()
+	case "":
+		// Do nothing
+	default:
+		return nil, fmt.Errorf("unsupported http-version: %s", request.HttpVersion)
 	}
 
 	surfClient := builder.Build().Unwrap()

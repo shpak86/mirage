@@ -25,14 +25,20 @@ type Response struct {
 }
 
 type HttpClient struct {
+	proxy string
 }
 
-func NewHttpClient() *HttpClient {
-	return &HttpClient{}
+func NewHttpClient(proxy string) (client *HttpClient) {
+	return &HttpClient{
+		proxy: proxy,
+	}
 }
 
 func (h *HttpClient) Do(request Request) (response *Response, err error) {
 	builder := surf.NewClient().Builder()
+	if h.proxy != "" {
+		builder.Proxy(g.String(h.proxy))
+	}
 	browser, Os, _ := strings.Cut(request.Fingerprint, "-")
 	if browser == "" {
 		browser = "chrome"
